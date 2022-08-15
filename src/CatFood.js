@@ -28,11 +28,11 @@ function CatFood(props) {
   }
 
   return (
-  <Draggable onStop={(event) => handleStop(event)}>
-    <div>
-      <img src={catFood} alt="food" width={"50"} onDragStart={e => preventDragHandler(e)}/>
-    </div>
-  </Draggable>
+    <Draggable onStop={(event) => handleStop(event)} className={"drag"} position={{x:0, y:0}}>
+      <div>
+        <img src={catFood} alt="food" width={"50"} onDragStart={e => preventDragHandler(e)}/>
+      </div>
+    </Draggable>
   )
 }
 
