@@ -1,7 +1,7 @@
 import React from 'react';
 import CatFood from './CatFood';
 
-function CatImageHolder() {
+function CatImageHolder(props) {
   const [image, setImage] = React.useState('');
   const [x, setX] = React.useState(0);
   const [y, setY] = React.useState(0);
@@ -14,7 +14,6 @@ function CatImageHolder() {
 
   function setPosition() {
     let bound = imageRef.current.getBoundingClientRect();
-    console.log(bound);
     setX(bound.left);
     setY(bound.top);
     setWidth(bound.width);
@@ -41,7 +40,11 @@ function CatImageHolder() {
   return (
     <div className="container">
       <img className="cat-image" src={image} alt="new" ref={imageRef} onLoad={() => setLoaded(true)} style={loaded ? {} : {display: 'none'}}/>
-      <CatFood x={x} y={y} width={width} height={height} callBack = {() => setRefresh(!refresh)}/>  
+      <CatFood x={x} y={y} width={width} height={height} callBack = {() => {
+          setRefresh(!refresh);
+          props.callBack();
+        }
+      }/>  
     </div>
   )
 }
